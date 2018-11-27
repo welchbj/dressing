@@ -6,7 +6,6 @@ import sys
 
 from argparse import (
     ArgumentParser,
-    Namespace,
     RawTextHelpFormatter)
 
 from dressing.version import (
@@ -32,6 +31,7 @@ def get_parsed_args(args=None):
 
     return parser.parse_args(args)
 
+
 def main(args=None):
     """The main entrypoint into this tool."""
     try:
@@ -39,4 +39,3 @@ def main(args=None):
     except Exception as e:
         print('Unknown exception occured; re-raising it!', file=sys.stderr)
         raise e
-

@@ -4,6 +4,7 @@ import sys
 
 from dressing.cli import main as cli_main
 
+
 def main():
     """The function pointed to in console_scripts."""
     sys.exit(cli_main())
