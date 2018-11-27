@@ -1,0 +1,11 @@
+__pycache__
+samples/
+*.py[cod]
+*.egg
+
+.tox
+.vscode
+build
+dist
+todo.txt
+test.py
