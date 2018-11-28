@@ -10,20 +10,23 @@ from dressing.errors import (
     DressingPlatformException)
 
 
-def posix_only(func):
-    """Decorator marking functions as *nix-only."""
-    @wraps(func)
-    def check_posix(func):
+def posix_only(f):
+    """Decorator marking ftions as *nix-only."""
+    @wraps(f)
+    def wrapper(*args, **kwargs):
         if os.name != 'posix':
             raise DressingPlatformException(
                 'Function cannot be called on non-POSIX systems')
+        return f(*args, **kwargs)
+    return wrapper
 
 
-def win_only(func):
-    """Decorator for marking functions as Windows-only."""
-    @wraps(func)
-    def check_win(func):
+def win_only(f):
+    """Decorator for marking ftions as Windows-only."""
+    @wraps(f)
+    def wrapper(*args, **kwargs):
         if sys.platform != 'win32':
             raise DressingPlatformException(
                     'Function cannot be called on non-Windows systems')
-    return check_win
+        return f(*args, **kwargs)
+    return wrapper

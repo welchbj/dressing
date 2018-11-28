@@ -6,6 +6,9 @@ from .errors import (  # noqa
     DressingFunctionNotFoundException,
     DressingLibraryNotFoundException,
     DressingPlatformException)
+from .posix import (  # noqa
+    posix_find_lib,
+    posix_resolve_address)
 from .utils import (  # noqa
     posix_only,
     win_only)
