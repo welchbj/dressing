@@ -4,7 +4,10 @@ from .core import (  # noqa
 from .errors import (  # noqa
     DressingBaseException,
     DressingFunctionNotFoundException,
-    DressingLibraryNotFoundException)
+    DressingLibraryNotFoundException,
+    DressingPlatformException)
+from .utils import (  # noqa
+    win_only)
 from .win import (  # noqa
     win_find_lib,
     win_resolve_address)

@@ -1,18 +1,24 @@
 """Address resolution for Windows-based systems."""
 
 import ctypes
+import sys
 
-from ctypes.wintypes import (
-    HMODULE,
-    LPCSTR)
 from ctypes.util import (
     find_library)
 
 from dressing.errors import (
     DressingFunctionNotFoundException,
     DressingLibraryNotFoundException)
+from dressing.utils import (
+    win_only)
+
+if sys.platform == 'win32':
+    from ctypes.wintypes import (
+        HMODULE,
+        LPCSTR)
 
 
+@win_only
 def win_resolve_address(lib_name, func_name):
     """Get the resolved addresss of the specified lib / func combination.
 
@@ -51,6 +57,7 @@ def win_resolve_address(lib_name, func_name):
     return func_addr
 
 
+@win_only
 def win_find_lib(lib_name):
     """Find the full path to the specified library on Windows.
 

@@ -11,3 +11,7 @@ class DressingLibraryNotFoundException(DressingBaseException):
 
 class DressingFunctionNotFoundException(DressingBaseException):
     """Exception type for when functions cannot be found within libraries."""
+
+
+class DressingPlatformException(DressingBaseException):
+    """Exception type for calling functions on the improper platform."""

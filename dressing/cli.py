@@ -14,7 +14,8 @@ from dressing.core import (
 from dressing.errors import (
     DressingBaseException,
     DressingFunctionNotFoundException,
-    DressingLibraryNotFoundException)
+    DressingLibraryNotFoundException,
+    DressingPlatformException)
 from dressing.version import (
     __version__)
 
@@ -92,6 +93,9 @@ def main(args=None):
         return 1
     except DressingBaseException as e:
         print('Unexpected exception occured:', e, file=sys.stderr)
+        return 1
+    except DressingPlatformException as e:
+        print('Unexpected platform error occured:', e, file=sys.stderr)
         return 1
     except Exception as e:
         print('Unknown exception occurred; re-raising it!', file=sys.stderr)
