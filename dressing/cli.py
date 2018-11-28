@@ -25,7 +25,22 @@ def get_parsed_args(args=None):
         prog='dressing',
         usage='dressing LIBRARY FUNCTION',
         description=(
-            'address resolution for you and your friends'),
+            '         8I\n'
+            '         8I\n'
+            '         8I                                           gg\n'
+            '         8I                                           ""\n'
+            '   ,gggg,8I   ,gggggg,   ,ggg,     ,g,       ,g,      gg    ,ggg,,ggg,     ,gggg,gg\n'       # noqa
+            '  dP"  "Y8I   dP""""8I  i8" "8i   ,8\'8,     ,8\'8,     88   ,8" "8P" "8,   dP"  "Y8I\n'     # noqa
+            ' i8\'    ,8I  ,8\'    8I  I8, ,8I  ,8\'  Yb   ,8\'  Yb    88   I8   8I   8I  i8\'    ,8I\n'  # noqa
+            ' d8,   ,d8b,,dP     Y8, `YbadP\' ,8\'_   8) ,8\'_   8) _,88,_,dP   8I   Yb,,d8,   ,d8I\n'    # noqa
+            ' "Y8888P"`Y88P      `Y8888P"Y888P\' "YY8P8PP\' "YY8P8P8P""Y88P\'   8I   `Y8P"Y8888P"888\n'   # noqa
+            '                                                                               ,d8I\'\n'     # noqa
+            '                                                                             ,dP\'8I\n'      # noqa
+            '                                                                            ,8"  8I\n'       # noqa
+            '                                                                            I8   8I\n'       # noqa
+            '                                                                            `8, ,8I\n'       # noqa
+            '                                                                             `Y8P"\n'        # noqa
+            '                    address resolution for you and your friends'),
         formatter_class=RawTextHelpFormatter)
 
     parser.add_argument(
