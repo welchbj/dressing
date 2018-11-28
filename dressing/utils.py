@@ -10,10 +10,10 @@ from dressing.errors import (
     DressingPlatformException)
 
 
-def nix_only(func):
+def posix_only(func):
     """Decorator marking functions as *nix-only."""
     @wraps(func)
-    def check_nix(func):
+    def check_posix(func):
         if os.name != 'posix':
             raise DressingPlatformException(
                 'Function cannot be called on non-POSIX systems')

@@ -7,6 +7,7 @@ from .errors import (  # noqa
     DressingLibraryNotFoundException,
     DressingPlatformException)
 from .utils import (  # noqa
+    posix_only,
     win_only)
 from .win import (  # noqa
     win_find_lib,
