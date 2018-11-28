@@ -2,7 +2,8 @@
 
 import sys
 
-from dressing.cli import main as cli_main
+from dressing.cli import (
+    main as cli_main)
 
 
 def main():
