@@ -29,6 +29,12 @@ def get_parsed_args(args=None):
         formatter_class=RawTextHelpFormatter)
 
     parser.add_argument(
+        '-v', '--verbose',
+        action='store_true',
+        default=False,
+        help='increase detail of output')
+
+    parser.add_argument(
         '--version',
         action='version',
         version=str(__version__),
@@ -58,6 +64,9 @@ def main(args=None):
         opts = get_parsed_args(args)
 
         lib_path = find_lib(opts.library)
+        if opts.verbose:
+            print('Using library at', lib_path)
+
         addr = resolve_address(lib_path, opts.function)
         print(hex(addr))
 
