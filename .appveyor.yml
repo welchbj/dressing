@@ -1,0 +1,25 @@
+environment:
+    matrix:
+        - PYTHON: "C:\\Python27"
+        - PYTHON: "C:\\Python27-x64"
+        - PYTHON: "C:\\Python33"
+        - PYTHON: "C:\\Python33-x64"
+        - PYTHON: "C:\\Python34"
+        - PYTHON: "C:\\Python34-x64"
+        - PYTHON: "C:\\Python35"
+        - PYTHON: "C:\\Python35-x64"
+        - PYTHON: "C:\\Python36"
+        - PYTHON: "C:\\Python36-x64"
+        - PYTHON: "C:\\Python37"
+        - PYTHON: "C:\\Python37-x64"
+          RUN_FLAKE: "1"
+
+install:
+  - "if \"%RUN_FLAKE%\"==\"1\" %PYTHON%\\python.exe -m pip install flake8"
+  - "%PYTHON%\\python.exe setup.py install"
+
+test_script:
+  - "dressing --version"
+  - "dressing kernel32 GetProcAddress"
+  - "dressing -v kernel32 HeapCreate"
+  - "if \"%RUN_FLAKE%\"==\"1\" %PYTHON%\\Scripts\\flake8.exe ."
