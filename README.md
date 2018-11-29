@@ -2,7 +2,7 @@
   <img width="260" height="589" src="static/logo.png" alt="dressing">
 </p>
 <p align="center">
-  :cyclone: <em>address resolution for you and your friends</em> :cyclone:
+  :telescope: <em>address resolution for you and your friends</em> :microscope:
 </p>
 <p align="center">
   <a href="https://pypi.org/project/dressing/">
