@@ -11,6 +11,12 @@
   <a href="https://pypi.org/project/dressing/">
     <img src="https://img.shields.io/pypi/pyversions/dressing.svg?style=flat-square" alt="pyversions">
   </a>
+  <a href="https://travis-ci.org/welchbj/dressing">
+    <img src="https://img.shields.io/travis/welchbj/dressing/master.svg?style=flat-square&label=linux%20build" alt="Linux build on Travis CI">
+  </a>
+  <a href="https://ci.appveyor.com/project/welchbj/dressing">
+    <img src="https://img.shields.io/appveyor/ci/welchbj/dressing/master.svg?style=flat-square&label=windows%20build" alt="Windows build on Appveyor">
+  </a>
 </p>
 
 ---
