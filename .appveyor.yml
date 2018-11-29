@@ -21,7 +21,7 @@ install:
 build: off
 
 test_script:
-  - "dressing --version"
-  - "dressing kernel32 GetProcAddress"
-  - "dressing -v kernel32 HeapCreate"
+  - "%PYTHON%\\python.exe -m dressing --version"
+  - "%PYTHON%\\python.exe -m dressing kernel32 GetProcAddress"
+  - "%PYTHON%\\python.exe -m dressing -v kernel32 HeapCreate"
   - "if \"%RUN_FLAKE%\"==\"1\" %PYTHON%\\Scripts\\flake8.exe ."
