@@ -5,6 +5,8 @@ import ctypes
 from ctypes.util import (
     find_library)
 
+from dressing._compat import (
+    c_str_buf)
 from dressing.errors import (
     DressingFunctionNotFoundException,
     DressingLibraryNotFoundException)
@@ -40,8 +42,7 @@ def posix_resolve_address(lib_name, func_name):
         raise DressingLibraryNotFoundException(
             'Unable to find library + `' + lib_name + '`')
 
-    func_name_buf = ctypes.create_string_buffer(len(func_name) + 1)
-    func_name_buf.value = func_name
+    func_name_buf = c_str_buf(func_name)
     func_addr = libdl.dlsym(lib_dll._handle, func_name_buf)
     if not func_addr:
         raise DressingFunctionNotFoundException(

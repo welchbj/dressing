@@ -6,6 +6,8 @@ import sys
 from ctypes.util import (
     find_library)
 
+from dressing._compat import (
+    c_str_buf)
 from dressing.errors import (
     DressingFunctionNotFoundException,
     DressingLibraryNotFoundException)
@@ -47,8 +49,9 @@ def win_resolve_address(lib_name, func_name):
         raise DressingLibraryNotFoundException(
             'Unable to find specified library `' + lib_name + '`')
 
+    func_name_buf = c_str_buf(func_name)
     func_addr = kernel32.GetProcAddress(
-        lib_dll._handle, bytes(func_name, encoding='utf-8'))
+        lib_dll._handle, func_name_buf)
     if not func_addr:
         raise DressingFunctionNotFoundException(
             'Unable to find function `' + func_name + '` in library `' +

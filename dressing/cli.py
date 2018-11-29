@@ -84,7 +84,7 @@ def main(args=None):
             print('Using library at', lib_path)
 
         addr = resolve_address(lib_path, opts.function)
-        print(hex(addr))
+        print(hex(addr).rstrip('L'))
 
         return 0
     except (DressingFunctionNotFoundException,
