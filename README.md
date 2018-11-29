@@ -39,7 +39,7 @@ pip install https://github.com/welchbj/dressing/archive/master.tar.gz
 
 The `dressing` command-line tool accepts two arguments: the name of the library in which you would like to search and the name of the function for which you would like to find the address.
 
-A complete name does not need to be provided, as some searching will be performed based on OS semantics. Here's a quick example on a Windows box:
+A complete shared library name does not need to be provided, as some searching will be performed based on OS semantics. Here's a quick example on a Windows box:
 ```sh
 $ dressing kernel32 HeapCreate
 0x7ffa41b1d900
