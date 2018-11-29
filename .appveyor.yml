@@ -18,6 +18,8 @@ install:
   - "if \"%RUN_FLAKE%\"==\"1\" %PYTHON%\\python.exe -m pip install flake8"
   - "%PYTHON%\\python.exe setup.py install"
 
+build: off
+
 test_script:
   - "dressing --version"
   - "dressing kernel32 GetProcAddress"
