@@ -51,6 +51,12 @@ $ dressing kernel32 HeapCreate
 0x7ffa41b1d900
 ```
 
+Note that the previous example is reporting the absolute address in memory of `HeapCreate`. If you wanted the offset to `HeapCreate` (using the base address of the loaded `kernel32.dll` module as our point of reference), you'd use:
+```sh
+$ dressing -o kernel32 HeapCreate
+0x1d900
+```
+
 To see more details about the location of the shared library identified by `dressing`, use the `-v` option. The fully specified path is provided for Windows, as shown in the below example.
 ```sh
 $ dressing -v kernel32.dll LoadLibraryA
@@ -64,6 +70,41 @@ $ dressing -v c printf
 Using library at libc.so.6
 0x7f0c6fe3ced0
 ```
+
+## Detailed options
+
+Here's what you should see when running `dressing --help`:
+```
+usage: dressing LIBRARY FUNCTION
+
+         8I
+         8I
+         8I                                           gg
+         8I                                           ""
+   ,gggg,8I   ,gggggg,   ,ggg,     ,g,       ,g,      gg    ,ggg,,ggg,     ,gggg,gg
+  dP"  "Y8I   dP""""8I  i8" "8i   ,8'8,     ,8'8,     88   ,8" "8P" "8,   dP"  "Y8I
+ i8'    ,8I  ,8'    8I  I8, ,8I  ,8'  Yb   ,8'  Yb    88   I8   8I   8I  i8'    ,8I
+ d8,   ,d8b,,dP     Y8, `YbadP' ,8'_   8) ,8'_   8) _,88,_,dP   8I   Yb,,d8,   ,d8I
+ "Y8888P"`Y88P      `Y8888P"Y888P' "YY8P8PP' "YY8P8P8P""Y88P'   8I   `Y8P"Y8888P"888
+                                                                               ,d8I'
+                                                                             ,dP'8I
+                                                                            ,8"  8I
+                                                                            I8   8I
+                                                                            `8, ,8I
+                                                                             `Y8P"
+                    address resolution for you and your friends
+
+positional arguments:
+  LIBRARY        the library in which to search for the specified function
+  FUNCTION       the function whose address you want to resolve
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -o, --offset   print the offset of the function within its loaded module
+  -v, --verbose  increase detail of output
+  --version      program version
+```
+
 
 ## Special Thanks
 
