@@ -71,6 +71,16 @@ Using library at libc.so.6
 0x7f0c6fe3ced0
 ```
 
+## Disclaimer
+
+It should be noted that due to the shared library search semantics of `dlsym` (used under the hood for POSIX-based function lookups), the search space for a function name will include all loaded modules. This results in the following undesirable behavior, where we still receive addresses for functions that are not exported directly within the library we specify:
+```sh
+$ dressing dl printf
+0x7f4d00c59e80
+```
+
+As such, make sure you know the "owning" module of the function which you're resolving.
+
 ## Detailed options
 
 Here's what you should see when running `dressing --help`:
