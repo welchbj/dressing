@@ -14,6 +14,15 @@ from dressing.utils import (
     posix_only)
 
 
+class _Dl_info(ctypes.Structure):
+    _fields_ = [
+        ('dli_fname', ctypes.c_char_p),
+        ('dli_fbase', ctypes.c_void_p),
+        ('dli_sname', ctypes.c_char_p),
+        ('dli_saddr', ctypes.c_void_p),
+    ]
+
+
 @posix_only
 def posix_resolve_address(lib_name, func_name, absolute=False):
     """Get the resolved address of the specified lib / func combination.
@@ -39,8 +48,6 @@ def posix_resolve_address(lib_name, func_name, absolute=False):
     libdl.dlsym.restype = ctypes.c_void_p
     libdl.dlsym.argtypes = (ctypes.c_void_p, ctypes.c_char_p)
 
-    # TODO: handle abs
-
     try:
         lib_dll = ctypes.CDLL(lib_name)
     except OSError:
@@ -54,8 +61,24 @@ def posix_resolve_address(lib_name, func_name, absolute=False):
             'Unable to find function `' + func_name + '` in library `' +
             lib_name + '`')
 
-    return func_addr
+    if absolute:
+        return func_addr
 
+    # compute function offset
+    libdl.dladdr.restype = ctypes.c_int
+    libdl.dladdr.argtypes = (ctypes.c_void_p, ctypes.POINTER(_Dl_info))
+
+    ret_dl_info = _Dl_info()
+    res = libdl.dladdr(func_addr, ctypes.pointer(ret_dl_info))
+    if not res:
+        raise DressingLibraryNotFoundException(
+            'Unable to look up shared library associated with address `' +
+            hex(func_addr) + '`')
+
+    base_addr = ret_dl_info.dli_fbase
+    offset = func_addr - base_addr
+    return offset
+    
 
 @posix_only
 def posix_find_lib(lib_name):
