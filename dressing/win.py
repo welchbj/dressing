@@ -21,13 +21,16 @@ if sys.platform == 'win32':
 
 
 @win_only
-def win_resolve_address(lib_name, func_name):
+def win_resolve_address(lib_name, func_name, absolute=False):
     """Get the resolved addresss of the specified lib / func combination.
 
     Args:
         lib_name (str): The name of the library in which to search.
         func_name (str): The name of the function whose address we will
             resolve.
+        absolute (bool): If `True`, load the absolute address of the specified
+            function in memory; otherwise, load the relative address using the
+            loaded module's base address as the point of reference.
 
     Raises:
         DressingFunctionNotFoundException: If the function cannot be found in
@@ -57,7 +60,13 @@ def win_resolve_address(lib_name, func_name):
             'Unable to find function `' + func_name + '` in library `' +
             lib_name + '`')
 
-    return func_addr
+    if absolute:
+        return func_addr
+
+    # compute relative address
+    base_addr = lib_dll._handle
+    offset = func_addr - base_addr
+    return offset
 
 
 @win_only

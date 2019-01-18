@@ -45,6 +45,12 @@ def get_parsed_args(args=None):
         formatter_class=RawTextHelpFormatter)
 
     parser.add_argument(
+        '-o', '--offset',
+        action='store_true',
+        default=False,
+        help='print the offset of the function within its loaded module')
+
+    parser.add_argument(
         '-v', '--verbose',
         action='store_true',
         default=False,
@@ -83,7 +89,8 @@ def main(args=None):
         if opts.verbose:
             print('Using library at', lib_path)
 
-        addr = resolve_address(lib_path, opts.function)
+        absolute = not opts.offset
+        addr = resolve_address(lib_path, opts.function, absolute=absolute)
         print(hex(addr).rstrip('L'))
 
         return 0
@@ -91,11 +98,11 @@ def main(args=None):
             DressingLibraryNotFoundException) as e:
         print(e, file=sys.stderr)
         return 1
-    except DressingBaseException as e:
-        print('Unexpected exception occured:', e, file=sys.stderr)
-        return 1
     except DressingPlatformException as e:
         print('Unexpected platform error occured:', e, file=sys.stderr)
+        return 1
+    except DressingBaseException as e:
+        print('Unexpected exception occured:', e, file=sys.stderr)
         return 1
     except Exception as e:
         print('Unknown exception occurred; re-raising it!', file=sys.stderr)

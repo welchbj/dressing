@@ -10,7 +10,7 @@ from dressing.win import (
     win_resolve_address)
 
 
-def resolve_address(lib_name, func_name):
+def resolve_address(lib_name, func_name, absolute=False):
     """Resolve the address of the specified function / library combination.
 
     Args:
@@ -28,9 +28,9 @@ def resolve_address(lib_name, func_name):
 
     """
     if sys.platform == 'win32':
-        return win_resolve_address(lib_name, func_name)
+        return win_resolve_address(lib_name, func_name, absolute=absolute)
     else:
-        return posix_resolve_address(lib_name, func_name)
+        return posix_resolve_address(lib_name, func_name, absolute=absolute)
 
 
 def find_lib(lib_name):

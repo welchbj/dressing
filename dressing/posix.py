@@ -15,12 +15,15 @@ from dressing.utils import (
 
 
 @posix_only
-def posix_resolve_address(lib_name, func_name):
+def posix_resolve_address(lib_name, func_name, absolute=False):
     """Get the resolved address of the specified lib / func combination.
 
     Args:
         lib_name (str): The name of the library in which to search.
         func_name (str): The name of the function for which to search.
+        absolute (bool): If `True`, load the absolute address of the specified
+            function in memory; otherwise, load the relative address using the
+            loaded module's base address as the point of reference.
 
     Raises:
         DressingFunctionNotFoundException: If the function cannot be
@@ -35,6 +38,8 @@ def posix_resolve_address(lib_name, func_name):
     libdl = ctypes.CDLL(find_library('dl'))
     libdl.dlsym.restype = ctypes.c_void_p
     libdl.dlsym.argtypes = (ctypes.c_void_p, ctypes.c_char_p)
+
+    # TODO: handle abs
 
     try:
         lib_dll = ctypes.CDLL(lib_name)
