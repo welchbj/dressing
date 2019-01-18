@@ -78,7 +78,7 @@ def posix_resolve_address(lib_name, func_name, absolute=False):
     base_addr = ret_dl_info.dli_fbase
     offset = func_addr - base_addr
     return offset
-    
+
 
 @posix_only
 def posix_find_lib(lib_name):
